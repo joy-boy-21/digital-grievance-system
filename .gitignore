@@ -1,0 +1,49 @@
+# Node.js
+node_modules/
+npm-debug.log
+yarn-error.log
+.env
+
+# Build directories
+/dist/
+/build/
+/public/
+
+# Vite
+/.vite/
+
+# React Native (if applicable)
+/.expo/
+/.expo-shared/
+
+# OS-specific files
+.DS_Store
+Thumbs.db
+
+# Log files
+*.log
+
+# IDE / Editor files
+.vscode/
+.idea/
+
+# Coverage directory for test reports
+/coverage/
+
+# Next.js (if applicable)
+/.next/
+
+# SASS / SCSS compiled files
+*.css.map
+
+# Dependency directories
+/bower_components/
+
+# Docker
+.docker/
+
+# Jest
+jest-coverage/
+
+# Webpack
+webpack-config.js
