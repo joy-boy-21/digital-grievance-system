@@ -16,7 +16,7 @@ const THRESHOLDS_HOURS = {
 const ROLE_CHAIN = ["HOD", "DEAN", "CHANCELLOR"];
 
 export function shouldEscalate(grievance) {
-  if (!["PENDING", "IN_PROGRESS", "ESCALATED"].includes(grievance.status)) return false;
+  if (!["PENDING", "IN_PROGRESS", "ESCALATED","RESOLVED"].includes(grievance.status)) return false;
   const hours = THRESHOLDS_HOURS[grievance.priority] ?? 48;
   const last = grievance.lastActionAt ? new Date(grievance.lastActionAt) : new Date(grievance.createdAt);
   const diffHrs = (Date.now() - last.getTime()) / (1000 * 60 * 60);

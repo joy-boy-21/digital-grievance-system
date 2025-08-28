@@ -10,6 +10,16 @@ import ProtectedRoute from "./routes/ProtectedRoute";
 
 import Layout from "./components/Layout";
 
+import Home from "./pages/Home";
+
+// ...
+<Route path="/" element={
+  <Layout>
+    <Home />
+  </Layout>
+} />
+
+
 /*function Home() {
   return <div className="card">Welcome! Use the sidebar to navigate.</div>;
 } */
@@ -18,17 +28,17 @@ import { useContext, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "./context/AuthContext";
 
-function Home() {
-  const { user } = useContext(AuthContext);
-  const nav = useNavigate();
+// function Home() {
+//   const { user } = useContext(AuthContext);
+//   const nav = useNavigate();
 
-  useEffect(() => {
-    if (user?.role === "STUDENT") nav("/submit");
-    else if (["HOD","DEAN","CHANCELLOR","ADMIN"].includes(user?.role)) nav("/admin");
-  }, [user]);
+//   useEffect(() => {
+//     if (user?.role === "STUDENT") nav("/submit");
+//     else if (["HOD","DEAN","CHANCELLOR","ADMIN"].includes(user?.role)) nav("/admin");
+//   }, [user]);
 
-  return <div className="card">The HomePage</div>;
-}
+//   return <div className="card">The HomePage</div>;
+// }
 
 
 export default function App() {
