@@ -69,47 +69,47 @@ export const me = async (req, res) => {
 
 //Variant 2
 
-import jwt from "jsonwebtoken";
-import { validationResult } from "express-validator";
-import User, { USER_ROLES } from "../models/User.js";
+// import jwt from "jsonwebtoken";
+// import { validationResult } from "express-validator";
+// import User, { USER_ROLES } from "../models/User.js";
 
-// This is for generating the JWT token when a user logs in or registers.
-const signToken = (user) =>
-  jwt.sign(
-    { id: user._id, role: user.role, institutionId: user.institutionId },
-    process.env.JWT_SECRET,
-    { expiresIn: process.env.JWT_EXPIRES_IN || "7d" }
-  );
+// // This is for generating the JWT token when a user logs in or registers.
+// const signToken = (user) =>
+//   jwt.sign(
+//     { id: user._id, role: user.role, institutionId: user.institutionId },
+//     process.env.JWT_SECRET,
+//     { expiresIn: process.env.JWT_EXPIRES_IN || "7d" }
+//   );
 
-/**
- * POST /api/auth/register
- * Body: { name, email, password, institutionId, role?, department? }
- * Only ADMIN can create other staff. Public can create STUDENT (demo choice).
- */
-export const register = async (req, res) => {
-  const errors = validationResult(req);
-  if (!errors.isEmpty()) return res.status(400).json({ errors: errors.array() });
+// /**
+//  * POST /api/auth/register
+//  * Body: { name, email, password, institutionId, role?, department? }
+//  * Only ADMIN can create other staff. Public can create STUDENT (demo choice).
+//  */
+// export const register = async (req, res) => {
+//   const errors = validationResult(req);
+//   if (!errors.isEmpty()) return res.status(400).json({ errors: errors.array() });
 
-  const { name, email, password, institutionId, role = "STUDENT", department } = req.body;
+//   const { name, email, password, institutionId, role = "STUDENT", department } = req.body;
 
-  // Ensure only an admin can create another admin
-  if (req.user && req.user.role !== "ADMIN" && role === "ADMIN") {
-    return res.status(403).json({ message: "Only ADMIN can create admin users" });
-  }
+//   // Ensure only an admin can create another admin
+//   if (req.user && req.user.role !== "ADMIN" && role === "ADMIN") {
+//     return res.status(403).json({ message: "Only ADMIN can create admin users" });
+//   }
 
-  const exists = await User.findOne({ email });
-  if (exists) return res.status(409).json({ message: "User already exists" });
+//   const exists = await User.findOne({ email });
+//   if (exists) return res.status(409).json({ message: "User already exists" });
 
-  if (!USER_ROLES.includes(role)) {
-    return res.status(400).json({ message: "Invalid role" });
-  }
+//   if (!USER_ROLES.includes(role)) {
+//     return res.status(400).json({ message: "Invalid role" });
+//   }
 
-  const user = await User.create({ name, email, password, institutionId, role, department });
-  const token = signToken(user);
+//   const user = await User.create({ name, email, password, institutionId, role, department });
+//   const token = signToken(user);
 
-  res.status(201).json({
-    token,
-    user: { id: user._id, name: user.name, email: user.email, role: user.role, institutionId: user.institutionId, department: user.department }
-  });
-};
+//   res.status(201).json({
+//     token,
+//     user: { id: user._id, name: user.name, email: user.email, role: user.role, institutionId: user.institutionId, department: user.department }
+//   });
+// };
 

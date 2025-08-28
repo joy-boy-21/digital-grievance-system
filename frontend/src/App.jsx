@@ -27,7 +27,7 @@ function Home() {
     else if (["HOD","DEAN","CHANCELLOR","ADMIN"].includes(user?.role)) nav("/admin");
   }, [user]);
 
-  return <div className="card">Redirecting...</div>;
+  return <div className="card">The HomePage</div>;
 }
 
 
@@ -52,48 +52,3 @@ export default function App() {
     </Routes>
   );
 }
-
-
-/*export default function App() {
-  return (
-    <>
-      <Navbar />
-      <div className="max-w-7xl mx-auto p-6">
-        <Routes>
-          <Route path="/" element={<div className="card">Welcome to the Digital Grievance Portal prototype. Use the navigation to try features.</div>} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/register" element={<Register />} />
-          <Route path="/submit" element={<GrievanceForm />} />
-          <Route path="/student" element={
-            <ProtectedRoute allowedRoles={[]}>
-              <StudentPortal />
-            </ProtectedRoute>
-          } />
-          <Route path="/admin" element={
-            <ProtectedRoute allowedRoles={["HOD", "DEAN", "CHANCELLOR", "ADMIN"]}>
-              <AdminDashboard />
-            </ProtectedRoute>
-          } />
-          <Route path="*" element={<div className="card">Page not found — <Link to="/">Go home</Link></div>} />
-        </Routes>
-      </div>
-    </>
-  );
-}
-
-import { useContext, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
-import { AuthContext } from "./context/AuthContext";
-
-function Home() {
-  const { user } = useContext(AuthContext);
-  const nav = useNavigate();
-
-  useEffect(() => {
-    if (user?.role === "STUDENT") nav("/submit");
-    else if (["HOD","DEAN","CHANCELLOR","ADMIN"].includes(user?.role)) nav("/admin");
-  }, [user]);
-
-  return <div className="card">Redirecting...</div>;
-}
-*/
